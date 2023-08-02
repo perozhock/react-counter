@@ -1,0 +1,10 @@
+.item-text {
+    color: rgba(123, 0, 0, .5);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.strike {
+    color: #000;
+    text-decoration: line-through;
+}
