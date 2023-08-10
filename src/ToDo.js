@@ -56,7 +56,8 @@ const TodoList = () => {
     }
 
     return (
-        <div>
+        <div className="todo">
+            <div className="todo-name">Список дел</div>
             <InputForm onAdd={addTask} />
             {todo.map(item => (<TodoI key={item.id} item={item} onli={() => toogleTask(item.id)} />))}
         </div>
