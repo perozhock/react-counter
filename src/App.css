@@ -1,3 +1,18 @@
+/* First app COUNTER */
+.counter {
+    margin-bottom: 50px;
+}
+
+/* Second app TODO */
+
+.todo {
+    margin-bottom: 50px;
+}
+
+.todo-name {
+    margin-bottom: 10px;
+}
+
 .item-text {
     color: rgba(123, 0, 0, .5);
     text-decoration: none;
@@ -7,4 +22,17 @@
 .strike {
     color: #000;
     text-decoration: line-through;
+}
+
+/* Third app TIMER */
+
+.countdown-name {
+    margin-bottom: 10px;
+}
+
+.inp {
+    display: inline-block;
+    width: 15px;
+    text-align: center;
+    border: none;
 }
