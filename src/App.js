@@ -5,6 +5,7 @@ import TodoList from "./ToDo";
 import './App.css';
 import Counter from "./Counter";
 import CountdownTimer from "./CoundownTimer";
+import Weather from "./Weather";
 
 class App extends React.Component {
 
@@ -13,6 +14,7 @@ render() {
     <Counter />
     <TodoList />
     <CountdownTimer />
+    <Weather />
   </div>
   
 }
