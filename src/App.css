@@ -26,6 +26,10 @@
 
 /* Third app TIMER */
 
+.countdown {
+    margin-bottom: 50px;
+}
+
 .countdown-name {
     margin-bottom: 10px;
 }
@@ -35,4 +39,45 @@
     width: 15px;
     text-align: center;
     border: none;
+}
+
+/* Fourth app WEATHER */
+
+.weather {
+    margin-bottom: 50px;
+}
+
+.weather-name {
+    margin-bottom: 10px;
+}
+
+.weather__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.list {
+    display: flex;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 90%;
+}
+
+.list__item {
+    margin-right: 10px;
+}
+
+.list__iitem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 120px;
+}
+
+.list__item img {
+    max-width: 150px;
 }
