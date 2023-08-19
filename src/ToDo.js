@@ -3,7 +3,7 @@ import { useState } from "react"
 const data = [
     {
         id: 1,
-        title: "a",
+        title: "-",
         isComlete: false    
     }
 ]
