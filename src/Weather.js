@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 const Weather = () => {
 
@@ -9,24 +9,29 @@ const Weather = () => {
     const [daysData, setDaysData] = useState([])
     const [location, setLocation] = useState([])
     const [city, setCity] = useState('moscow')
-    const [isVisible, setIsVisible] = useState(true)
+    const [isVisible, setIsVisible] = useState(false)
 
-    const SearchBar = ({city}) => {
-        const [value, setValue] = useState("")
+    const SearchBar = ( {city} ) => {
+        const [value, setValue] = useState("");
+        const inputRef = useRef(null);
 
         const urlL = `http://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=10&appid=${apikey}`
 
-        const getLocation = () => {
-            axios.get(urlL).then((response) => {
-                setLocation(response.data)
-                console.log(response.data)
-            })
-        }
+        const getLocation = async () => {
+            try {
+                const response = await axios.get(urlL);
+                setLocation(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error("Ошибка при получении данных:", error);
+                alert("Не удалось загрузить данные. Попробуйте позже.");
+            }
+        };
 
         const handleKey = (ev) => {
             if (ev.key === 'Enter') {
                 getLocation()
-                setValue('')
+                // setValue('')
             }
             return;
         }
@@ -34,8 +39,8 @@ const Weather = () => {
         const logg = (e) => {
             console.log(e.target.firstChild.data)
             city(e.target.firstChild.data)
-            // setIsVisible(isVisible => !isVisible)
-            setLocation('')
+            setIsVisible(false)
+            // setLocation('')
         }
 
         const checkVisible = () => {
@@ -43,25 +48,30 @@ const Weather = () => {
         }
 
         const inputClickHandler = () => {
-            setIsVisible(true)
+            inputRef.current.focus();
+            if (!isVisible) {
+                setIsVisible(true);
+            }
         }
 
         return (
-            <div>
+            <div className='search-container'>
                 <div>
-                <input onChange={(ev) => setValue(ev.target.value)}
-                        onKeyUp={handleKey} value={value}
-                        onFocus={inputClickHandler}></input>
+                {<input className='search-input' 
+                        ref={inputRef}
+                        onChange={(ev) => setValue(ev.target.value)}
+                        onKeyDown={handleKey} value={value}
+                        onFocus={inputClickHandler}/>}
                     <button onClick={checkVisible}>FF</button>
                 </div>  
-            <ul>
-                {isVisible && location
-                ? location.map(loc => (<li key={loc.lat} onClick={logg}>
-                    {loc.local_names ? loc.local_names?.en : loc.name}{" "}  
-                    {loc.country}{" "}
-                    {loc.state}</li>))
-                : null}
-            </ul>
+            {isVisible && location ?
+                <ul className='result-list'>
+                    {location.map((loc) => (<li key={loc.lat} onClick={logg}>
+                        {loc.local_names ? loc.local_names?.en : loc.name}{" "}  
+                        {loc.country}{" "}
+                        {loc.state}</li>))}
+                </ul>
+                    : null}
             </div>
         )
     }
@@ -172,7 +182,7 @@ const Weather = () => {
     return (
         <div className="weather">
             <div className="weather-name">Weather</div>
-            <SearchBar city={setCity} />
+            <SearchBar city={setCity} isvisible={() => {setIsVisible()}}/>
             <Forecast />
             <DayForecast />
         </div>
