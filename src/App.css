@@ -1,12 +1,90 @@
+html {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.app {
+    height: 100vh;
+    overflow-y: scroll;
+    font-family: sans-serif;
+    scroll-snap-type: y mandatory;
+}
+
+.app > div {
+    scroll-snap-align: center;
+}
+
+.app::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+.app::-webkit-scrollbar-thumb {
+    background-color: #a7a7a7;
+    border-radius: 5px;
+}
+
 /* First app COUNTER */
+
 .counter {
-    margin-bottom: 50px;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #0F0F0F;
+    flex: none;
+}
+
+.counter__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter__buttons button {
+    color: white;
+    font-size: 2em;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+    border: 1px;
+    border-radius: 15px;
+    outline: none;
+    background-color: #0F0F0F;
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.3);
+}
+
+.counter__buttons button:hover {
+    background-color: #272727;
+}
+
+.counter__buttons button:active {
+    background-color: #3D3D3D;
+    transform: translate(0px, 1px);
+    
 }
 
 /* Second app TODO */
 
 .todo {
-    margin-bottom: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: none;
 }
 
 .todo-name {
@@ -27,46 +105,120 @@
 /* Third app TIMER */
 
 .countdown {
-    margin-bottom: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #c1c1c1;
+    flex: none;
 }
 
 .countdown-name {
     margin-bottom: 10px;
 }
 
+.countdown__input {
+    display: flex;
+    font-size: 3em;
+}
+
 .inp {
-    display: inline-block;
-    width: 15px;
+    width: 55px;
+    background-color: transparent;
     text-align: center;
+    font-size: 1em;
     border: none;
 }
 
 /* Fourth app WEATHER */
 
 .weather {
-    margin-bottom: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: none;
 }
 
 .weather-name {
     margin-bottom: 10px;
 }
 
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    pointer-events: auto;
+}
+
+.result-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.result-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-list li:hover {
+    background-color: #f0f0f0;
+}
+
 .weather__block {
     display: flex;
     flex-direction: column;
     align-items: center;
+    white-space: nowrap;
+    max-width: 90%;
     /* justify-content: center; */
 }
 
 .list {
-    display: flex;
+    display: block;
     padding: 0;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 90%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: scroll;
+    height: 200px;
+    width: 70%;
+}
+
+.list::-webkit-scrollbar {
+    height: 7px;
+    background-color: #f7f7f7;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: #c7c7c7;
+    border-radius: 5px;
 }
 
 .list__item {
+    display: inline-flex;
+    position: relative;
+    width: 100px;
     margin-right: 10px;
 }
 
