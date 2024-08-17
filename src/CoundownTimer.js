@@ -32,11 +32,13 @@ const CountdownTimer = () => {
     return (
         <div className="countdown">
             <div className="countdown-name">Таймер</div>
-            <input className="inp" value={mn}
-            onChange={ev => setRemTime(ev.target.value*60)}></input>
-            <span>:</span>
-            <input className="inp" value={sc}
-            onChange={ev => setRemTime(ev.target.value)}></input>
+            <div className="countdown__input">
+                <input className="inp" value={mn}
+                onChange={ev => setRemTime(ev.target.value*60)}></input>
+                <span>:</span>
+                <input className="inp" value={sc}
+                onChange={ev => setRemTime(ev.target.value)}></input>
+            </div>
             <div>
                 {isRun 
                 ? (
