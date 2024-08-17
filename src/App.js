@@ -10,7 +10,7 @@ import Weather from "./Weather";
 class App extends React.Component {
 
 render() {
-  return <div>
+  return <div className="app">
     <Counter />
     <TodoList />
     <CountdownTimer />
