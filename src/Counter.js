@@ -13,10 +13,14 @@ const Counter = () => {
 
       return (
         <div className="counter">
-            <div>Счетчик</div>
-        <h1>Число: {count}</h1>
-        <button onClick={plus}>+</button>
-        <button onClick={minus}>-</button>
+            <div className="counter__name" >Счетчик</div>
+            <div className="counter__content">
+                <h1>Число: {count}</h1>
+            </div>
+            <div className="counter__buttons">
+                <button onClick={plus}>+</button>
+                <button onClick={minus}>-</button>
+            </div>
         </div>
       )
 
