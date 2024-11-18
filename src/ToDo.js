@@ -1,3 +1,4 @@
+import './styles/ToDo.css'
 import { useState } from "react"
 
 const data = [
