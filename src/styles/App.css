@@ -1,0 +1,28 @@
+html {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.app {
+    height: 100vh;
+    overflow-y: scroll;
+    font-family: sans-serif;
+    scroll-snap-type: y mandatory;
+}
+
+.app > div {
+    scroll-snap-align: center;
+}
+
+.app::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+.app::-webkit-scrollbar-thumb {
+    background-color: #a7a7a7;
+    border-radius: 5px;
+}
