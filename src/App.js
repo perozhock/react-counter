@@ -2,22 +2,22 @@
 // import { useEffect, useState } from "react";
 import React from "react";
 import TodoList from "./ToDo";
-import './App.css';
+import './styles/App.css';
 import Counter from "./Counter";
-import CountdownTimer from "./CoundownTimer";
-import Weather from "./Weather";
+import CountdownTimer from "./CountdownTimer";
+import Weather from "./weather/Weather";
 
 class App extends React.Component {
 
-render() {
-  return <div className="app">
-    <Counter />
-    <TodoList />
-    <CountdownTimer />
-    <Weather />
-  </div>
+  render() {
+    return <div className="app">
+      <Counter />
+      <TodoList />
+      <CountdownTimer />
+      <Weather />
+    </div>
   
-}
+  }
 }
 
 export default App;
