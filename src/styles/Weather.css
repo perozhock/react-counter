@@ -1,30 +1,42 @@
 .weather {
     height: 100vh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #f4f4f9;
     flex: none;
 }
 
 .weather-name {
     margin-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+
 }
 
 .search-container {
     position: relative;
+    margin-top: 10px;
     width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+    max-width: 320px;
+    margin-bottom: 20px;
 }
 
 .search-input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     pointer-events: auto;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .result-list {
@@ -32,6 +44,7 @@
     top: 100%;
     left: 0;
     right: 0;
+    width: 100%;
     max-height: 200px;
     overflow-y: auto;
     background-color: #fff;
@@ -39,17 +52,82 @@
     border-radius: 4px;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    list-style-type: none;
+    padding: 12px;
+    margin: 0;
 }
 
 .result-list li {
     padding: 10px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .result-list li:hover {
     background-color: #f0f0f0;
 }
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 auto;
+    width: 60%;
+    max-height: 80vh;
+    max-width: 90%; /* Ограниченная ширина */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.forecast-loading,
+.forecast-error {
+    font-size: 1.2em;
+    color: #666;
+    text-align: center;
+}
+
+.forecast-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    flex-direction: column;
+    gap: 10px; /* Расстояние между элементами */
+    font-size: 1em;
+    text-align: center;
+    color: #333;
+}
+
+.forecast-details p {
+    margin: 0;
+    padding: 10px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.forecast-details p:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.forecast-big {
+    font-size: 3em;
+}
+
 
 .weather__block {
     display: flex;
@@ -57,7 +135,13 @@
     align-items: center;
     white-space: nowrap;
     max-width: 90%;
+    width: 90%;
+    margin-top: 20px;
     /* justify-content: center; */
+}
+
+.weather__block h2 {
+    font-size: 1em;
 }
 
 .list {
@@ -65,13 +149,15 @@
     padding: 0;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    overflow-x: scroll;
-    height: 200px;
+    overflow-x: auto;
+    /* max-height: 150px; */
+    height: 90%;
     width: 70%;
+    gap: 10px;
 }
 
 .list::-webkit-scrollbar {
-    height: 7px;
+    height: 8px;
     background-color: #f7f7f7;
 }
 
@@ -82,9 +168,21 @@
 
 .list__item {
     display: inline-flex;
-    position: relative;
-    width: 100px;
-    margin-right: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 180px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.list__item:hover {
+    transform: translateY(-5px); /* Лёгкий подъём при наведении */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .list__iitem {
@@ -96,5 +194,7 @@
 }
 
 .list__item img {
-    max-width: 150px;
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: contain;
 }

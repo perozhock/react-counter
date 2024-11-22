@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import axios from 'axios'
 import debounce from 'lodash.debounce';
 
@@ -11,6 +11,7 @@ const SearchBar = ({ city }) => {
     const [location, setLocation] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const inputRef = useRef(null);
+    const resultsRef = useRef(null);
 
     const fetchLocations = async (query) => {
         if (!query) {
@@ -34,7 +35,7 @@ const SearchBar = ({ city }) => {
     // Debounce wrapper
     const handleInputChange = debounce((value) => {
         fetchLocations(value);
-    }, 1000);
+    }, 5000);
 
     const handleKeyDown = (ev) => {
         if (ev.key === 'Enter') {
@@ -77,6 +78,28 @@ const SearchBar = ({ city }) => {
         ));
     };
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setIsVisible(false);
+            }
+        };
+
+        const handleClickOutside = (e) => {
+            if (resultsRef.current && !resultsRef.current.contains(e.target)) {
+                setIsVisible(false);
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <div className='search-container'>
             <div>
@@ -93,7 +116,7 @@ const SearchBar = ({ city }) => {
                 />
             </div>
             {isVisible && (
-                <ul className='result-list'>{renderSuggestions()}</ul>
+                <ul className='result-list' ref={resultsRef}>{renderSuggestions()}</ul>
             )}
             </div>
     )

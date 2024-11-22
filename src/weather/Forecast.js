@@ -25,12 +25,15 @@ const Forecast = ({ city }) => {
     }, [city])
 
     const timeConv = (time, timezone) => {
-        if (typeof time == 'number') {
+        if (typeof time === 'number') {
             const localTime = new Date((time + timezone) * 1000);
-            return localTime.toISOString().substring(11, 5);
+            const hours = localTime.getUTCHours().toString().padStart(2, '0');
+            const minutes = localTime.getUTCMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        } else {
+            return '-';
         }
-        else return '-';
-    }
+    };
 
     const roundT = (cels) => (typeof cels === 'number' ? cels.toFixed() : '-');
 
@@ -44,18 +47,23 @@ const Forecast = ({ city }) => {
 
     return (
         <div className='forecast-container'>
-            <h2>Прогноз погоды</h2>
+            <h2 className='forecast-title'>Прогноз погоды</h2>
             {isLoading ? (
-                <p>Загрузка...</p>
+                <p className='forecast-loading'>Загрузка...</p>
             ) : error ? (
-                <p className="error">{error}</p>
+                <p className="forecast-error">{error}</p>
             ) : (
                 data && (
-                    <div>
+                    <div className='forecast-details'>
                         <p>Местоположение: {data.name || '-'}</p>
-                        <p>Температура: {roundT(data?.main?.temp)} °C</p>
+                        <p>Температура:<p className='forecast-temp'> {roundT(data?.main?.temp)} °C </p></p>
                         <p>Ощущается как: {roundT(data?.main?.feels_like)} °C</p>
-                        <p>Погода: {data?.weather?.[0]?.main || '-'}</p>
+                        <p>Погода: {data?.weather?.[0]?.main || '-'}<img
+                        
+                            alt={data?.weather?.[0]?.description || 'Weather icon'}
+                            src={`https://openweathermap.org/img/wn/${data?.weather?.[0]?.icon}@2x.png`}
+                            title={data?.weather?.[0]?.description || 'Weather'}
+                        /></p>
                         <p>
                             Рассвет: {timeConv(data?.sys?.sunrise, data?.timezone)}
                         </p>
