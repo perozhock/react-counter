@@ -5,19 +5,60 @@
     justify-content: center;
     align-items: center;
     flex: none;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6 px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
 }
 
 .todo-name {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.input input {
+    width: 100%;
+    padding: 10px;
     margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.todo-item {
+    width: 30%;
+    margin: 2px 0;
 }
 
 .item-text {
-    color: rgba(123, 0, 0, .5);
-    text-decoration: none;
-    display: inline-block;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: none;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.strike {
-    color: #000;
+.item-text.strike {
     text-decoration: line-through;
+    color: #888;
+}
+
+.item-text:hover {
+    background-color: #f1f1f1;
+    transform: translateY(-2px);
 }
