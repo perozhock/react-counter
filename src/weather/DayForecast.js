@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ThreeHourForecast from './ThreeHourForecast';
+import { ThreeHourForecast } from './ThreeHourForecast';
 import axios from 'axios';
 
-const DayForecast = ({ city }) => {
+export const DayForecast = ({ city }) => {
     const apikey = 'b6135fa9cdeb231961b63c035e2d8911';
 
     const [daysData, setDaysData] = useState([]);
@@ -41,16 +41,14 @@ const DayForecast = ({ city }) => {
                 <ul className="list">
                     {daysData.list
                         ? daysData.list.map((day) => (
-                              <ThreeHourForecast
+                            <ThreeHourForecast
                                 key={day.dt}
                                 days={day}
                                 timezone={daysData.city.timezone} />
-                          ))
+                        ))
                         : <p>Данные отсутствуют</p>}
                 </ul>
             )}
         </div>
     );
 };
-
-export default DayForecast;

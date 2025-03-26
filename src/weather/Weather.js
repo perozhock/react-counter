@@ -1,10 +1,10 @@
 import '../styles/Weather.css'
-import SearchBar from './SearchBar'
-import Forecast from './Forecast'
-import DayForecast from './DayForecast'
+import { SearchBar } from './SearchBar'
+import { Forecast } from './Forecast'
+import { DayForecast } from './DayForecast'
 import { useState } from 'react'
 
-const Weather = () => {
+export const Weather = () => {
 
     const [city, setCity] = useState('moscow')
 
@@ -17,5 +17,3 @@ const Weather = () => {
         </div>
     )
 }
-
-export default Weather;
