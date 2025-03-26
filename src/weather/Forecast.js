@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
+import { timeConvert } from '../constants/time';
 import axios from 'axios'
 
-const Forecast = ({ city }) => {
+export const Forecast = ({ city }) => {
 
     const apikey = 'b6135fa9cdeb231961b63c035e2d8911';
 
@@ -24,18 +25,8 @@ const Forecast = ({ city }) => {
         }
     }, [city])
 
-    const timeConv = (time, timezone) => {
-        if (typeof time === 'number') {
-            const localTime = new Date((time + timezone) * 1000);
-            const hours = localTime.getUTCHours().toString().padStart(2, '0');
-            const minutes = localTime.getUTCMinutes().toString().padStart(2, '0');
-            return `${hours}:${minutes}`;
-        } else {
-            return '-';
-        }
-    };
 
-    const roundT = (cels) => (typeof cels === 'number' ? cels.toFixed() : '-');
+    const roundT = (cells) => (typeof cells === 'number' ? cells.toFixed() : '-');
 
     useEffect(() => {
         if (city) {
@@ -55,21 +46,20 @@ const Forecast = ({ city }) => {
             ) : (
                 data && (
                     <div className='forecast-details'>
-                        <p>Местоположение: {data.name || '-'}</p>
-                        <p>Температура:<p className='forecast-temp'> {roundT(data?.main?.temp)} °C </p></p>
-                        <p>Ощущается как: {roundT(data?.main?.feels_like)} °C</p>
-                        <p>Погода: {data?.weather?.[0]?.main || '-'}<img
-                        
+                        <div>Местоположение: <p>{data.name || '-'}</p></div>
+                        <div>Температура:<p className='forecast-temp'> {roundT(data?.main?.temp)} °C </p></div>
+                        <div>Ощущается как: <p>{roundT(data?.main?.feels_like)} °C</p></div>
+                        <div>Погода: <p>{data?.weather?.[0]?.main || '-'}<img
                             alt={data?.weather?.[0]?.description || 'Weather icon'}
                             src={`https://openweathermap.org/img/wn/${data?.weather?.[0]?.icon}@2x.png`}
                             title={data?.weather?.[0]?.description || 'Weather'}
-                        /></p>
-                        <p>
-                            Рассвет: {timeConv(data?.sys?.sunrise, data?.timezone)}
-                        </p>
-                        <p>
-                            Закат: {timeConv(data?.sys?.sunset, data?.timezone)}
-                        </p>
+                        /></p></div>
+                        <div>
+                            Рассвет: <p>{timeConvert(data?.sys?.sunrise, data?.timezone)}</p>
+                        </div>
+                        <div>
+                            Закат: <p>{timeConvert(data?.sys?.sunset, data?.timezone)}</p>
+                        </div>
                     </div>
                 )
             )}
@@ -77,5 +67,3 @@ const Forecast = ({ city }) => {
     );
 
 }
-
-export default Forecast
