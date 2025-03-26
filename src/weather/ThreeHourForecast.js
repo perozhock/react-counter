@@ -1,5 +1,5 @@
-const ThreeHourForecast = ({ days, timezone }) => {
-    const timeConv = (time) => {
+export const ThreeHourForecast = ({ days, timezone }) => {
+    const timeConvert = (time) => {
         if (typeof time === 'number') {
             const localTime = new Date((time + timezone) * 1000); // Применяем часовой пояс
             const formattedDate = localTime.toLocaleDateString('en-GB', {
@@ -25,9 +25,7 @@ const ThreeHourForecast = ({ days, timezone }) => {
             <div>{days?.main?.temp?.toFixed() || '-'} °C</div>
             <div>{days?.weather?.[0]?.main || '-'}</div>
             <div>{days?.pop ? Math.round(days.pop * 100) : 0}%</div>
-            <div>{timeConv(days?.dt)}</div>
+            <div>{timeConvert(days?.dt)}</div>
         </li>
     );
 };
-
-export default ThreeHourForecast;

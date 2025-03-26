@@ -1,8 +1,8 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import debounce from 'lodash.debounce';
 
-const SearchBar = ({ city }) => {
+export const SearchBar = ({ city }) => {
 
     const apikey = 'b6135fa9cdeb231961b63c035e2d8911';
 
@@ -33,9 +33,9 @@ const SearchBar = ({ city }) => {
     };
 
     // Debounce wrapper
-    const handleInputChange = debounce((value) => {
+    const handleInputChange = useCallback(debounce((value) => {
         fetchLocations(value);
-    }, 5000);
+    }, 1000), []);
 
     const handleKeyDown = (ev) => {
         if (ev.key === 'Enter') {
@@ -91,6 +91,8 @@ const SearchBar = ({ city }) => {
             }
         };
 
+        handleInputChange(value);
+
         document.addEventListener("keydown", handleKeyDown);
         document.addEventListener("mousedown", handleClickOutside);
 
@@ -98,7 +100,7 @@ const SearchBar = ({ city }) => {
             document.removeEventListener("keydown", handleKeyDown);
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [value, handleInputChange]);
 
     return (
         <div className='search-container'>
@@ -108,9 +110,9 @@ const SearchBar = ({ city }) => {
                     value={value}
                     onChange={(ev) => {
                         setValue(ev.target.value);
-                        handleInputChange(ev.target.value);
+                        // handleInputChange(ev.target.value);
                     }}
-                    onKeyDown={handleKeyDown}
+                    // onKeyDown={handleKeyDown}
                     onFocus={handleInputClick}
                     placeholder='Введите город...'
                 />
@@ -118,8 +120,6 @@ const SearchBar = ({ city }) => {
             {isVisible && (
                 <ul className='result-list' ref={resultsRef}>{renderSuggestions()}</ul>
             )}
-            </div>
+        </div>
     )
 }
-
-export default SearchBar;
