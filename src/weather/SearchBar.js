@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 
 export const SearchBar = ({ city }) => {
 
-    const apikey = 'b6135fa9cdeb231961b63c035e2d8911';
+    const apikey = process.env.REACT_APP_API_KEY;
 
     const [value, setValue] = useState("");
     const [isVisible, setIsVisible] = useState(false);

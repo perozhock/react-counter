@@ -3,7 +3,8 @@ import { ThreeHourForecast } from './ThreeHourForecast';
 import axios from 'axios';
 
 export const DayForecast = ({ city }) => {
-    const apikey = 'b6135fa9cdeb231961b63c035e2d8911';
+    const apikey = process.env.REACT_APP_API_KEY;
+    console.log(apikey)
 
     const [daysData, setDaysData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);

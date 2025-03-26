@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const Forecast = ({ city }) => {
 
-    const apikey = 'b6135fa9cdeb231961b63c035e2d8911';
+    const apikey = process.env.REACT_APP_API_KEY;
 
     const [data, setData] = useState();
     const [isLoading, setIsLoading] = useState(false);
